@@ -1,0 +1,26 @@
+use std::process::Command;
+use std::path::Path; 
+
+fn main() {
+ let name = "/dev/sdb1";
+ let mount_point = "/mnt/disk";
+ if !Path::new(name).exists(){
+	println!("not present");
+return;
+}
+let mounted = Command::new("mountpoint").args(["-q", mount_point]).status().unwrap();
+
+if mounted.success(){
+	println!("already mounted");
+return;
+	}
+let status = Command::new("sudo").args(["mount", name, mount_point]).status().unwrap();
+let docker_status = Command::new("sudo").args(["docker restart $(docker ps
+if status.success(){
+println!("mounted");
+}
+else{
+println!("mount failed");
+}
+}	
+
